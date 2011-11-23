@@ -17,6 +17,8 @@ class InputStreamResource[+A <: InputStream] (
   extends InputResource[A]
   with ResourceOps[A, InputStreamResource[A]] {
 
+  def async[U](f: this.type => U):Future[U] = null
+  
   def open():OpenedResource[A] = new CloseableOpenedResource(opener,closeAction)
 
   def prependCloseAction[B >: A](newAction: CloseAction[B]) = new InputStreamResource[A](opener,newAction :+ closeAction,sizeFunc,descName)

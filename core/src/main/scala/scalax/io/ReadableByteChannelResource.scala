@@ -14,7 +14,8 @@ class ReadableByteChannelResource[+A <: ReadableByteChannel] (
     descName:ResourceDescName)
   extends InputResource[A]
   with ResourceOps[A, ReadableByteChannelResource[A]] {
-
+def async[U](f: this.type => U):Future[U] = null
+  
   def open():OpenedResource[A] = new CloseableOpenedResource(opener,closeAction)
 
   def prependCloseAction[B >: A](newAction: CloseAction[B]) = new ReadableByteChannelResource(opener,newAction :+ closeAction,sizeFunc,descName)

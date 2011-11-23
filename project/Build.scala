@@ -80,7 +80,9 @@ object ScalaIoBuild extends Build {
   
   val perfSettings: Seq[Setting[_]] = Seq(
     name := "scala-io-performance",
-    libraryDependencies += "com.github.jsuereth" %% "sperformance" % "0.1",
+    libraryDependencies ++= Seq(
+      "com.github.jsuereth" %% "sperformance" % "0.1",
+      "org.scalaz" %% "scalaz-full" % "6.0.3"),
     publishArtifact in Test := false
   )
 	lazy val perfProject = Project("perf", file("perf")).
@@ -107,8 +109,8 @@ object ScalaIoBuild extends Build {
   val docsSettings = inConfig(Docs)(Defaults.configSettings) ++ Seq[Setting[_]](
       scalacOptions in Docs ++= Seq("-doc-title", "Scala IO"),//, "–doc-source-url", "https://raw.github.com/jesseeichar/scala-io/master/core/src/main/scala/"),
       resourceDirectory := new File("documentation/src/main/resources"),
-      siteDir <<= baseDirectory map { base => new File(base, "target/website") },
-      //siteDir := new File("/Users/jeichar/Sites/scala-io-doc/"),
+      //siteDir <<= baseDirectory map { base => new File(base, "target/website") },
+      siteDir := new File("/Users/jeichar/Sites/scala-io-doc/"),
       SiteTask,
       site in Docs <<= (site in Docs).dependsOn(doc in Docs),
       sources in Docs <<=

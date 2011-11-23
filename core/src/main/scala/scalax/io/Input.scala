@@ -125,4 +125,5 @@ trait Input {
    */
   def slurpString(implicit codec: Codec = Codec.default) = new String(byteArray, codec.name)
   
+  def async[U](f: this.type => U):Future[U]
 }

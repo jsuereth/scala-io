@@ -21,7 +21,8 @@ class SeekableByteChannelResource[+A <: SeekableByteChannel] (
 
   def prependCloseAction[B >: A](newAction: CloseAction[B]) = new SeekableByteChannelResource(opener,newAction :+ closeAction,sizeFunc,descName,openOptions)
   def appendCloseAction[B >: A](newAction: CloseAction[B]) = new SeekableByteChannelResource(opener,closeAction +: newAction,sizeFunc,descName,openOptions)
-
+def async[U](f: this.type => U):Future[U] = null
+  
   def inputStream = {
     def nResource = new ChannelInputStreamAdapter(rawOpen())
     val closer = ResourceAdapting.closeAction(closeAction)

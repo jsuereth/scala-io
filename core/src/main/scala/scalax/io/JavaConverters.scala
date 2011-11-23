@@ -68,7 +68,8 @@ object JavaConverters {
           lazy val chars = codec.decode(t.view.map{_.toByte}.toArray)
           def iterator: CloseableIterator[Char] = CloseableIterator(chars.iterator)
         }
-
+def async[U](f: this.type => U):Future[U] = null
+  
         override def bytesAsInts = new LongTraversable[Int]{
           def iterator = new CloseableIterator[Int] {
             var iter = OutputConverter.TraversableIntConverter.toBytes(t)
@@ -103,7 +104,8 @@ object JavaConverters {
 
           def iterator: CloseableIterator[Char] = CloseableIterator(chars.iterator)
         }
-
+def async[U](f: this.type => U):Future[U] = null
+  
         override def bytesAsInts = new LongTraversable[Int]{
 
           def iterator: CloseableIterator[Int] = CloseableIterator(t.toIterator.map(_.toInt))

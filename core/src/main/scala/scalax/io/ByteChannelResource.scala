@@ -14,6 +14,8 @@ class ByteChannelResource[+A <: ByteChannel] (
   with OutputResource[A]
   with ResourceOps[A, ByteChannelResource[A]] {
 
+  def async[U](f: this.type => U):Future[U] = null
+  
   def open():OpenedResource[A] = new CloseableOpenedResource(opener,closeAction)
 
   def prependCloseAction[B >: A](newAction: CloseAction[B]) = new ByteChannelResource(opener,newAction :+ closeAction,sizeFunc)

@@ -12,7 +12,8 @@ class WritableByteChannelResource[+A <: WritableByteChannel] (
     closeAction:CloseAction[A])
   extends OutputResource[A]
   with ResourceOps[A, WritableByteChannelResource[A]]  {
-
+def async[U](f: this.type => U):Future[U] = null
+  
   def open():OpenedResource[A] = new CloseableOpenedResource(opener,closeAction)
 
   def prependCloseAction[B >: A](newAction: CloseAction[B]) = new WritableByteChannelResource(opener,newAction :+ closeAction)

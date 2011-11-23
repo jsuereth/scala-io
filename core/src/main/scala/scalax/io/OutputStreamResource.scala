@@ -12,7 +12,8 @@ class OutputStreamResource[+A <: OutputStream] (
     closeAction:CloseAction[A])
   extends OutputResource[A]
   with ResourceOps[A, OutputStreamResource[A]] {
-
+def async[U](f: this.type => U):Future[U] = null
+  
   def open(): OpenedResource[A] = new CloseableOpenedResource(opener,closeAction)
   def prependCloseAction[B >: A](newAction: CloseAction[B]) = new OutputStreamResource(opener,newAction :+ closeAction)
   def appendCloseAction[B >: A](newAction: CloseAction[B]) = new OutputStreamResource(opener,closeAction +: newAction)

@@ -151,5 +151,7 @@ trait Output {
    * input's copyTo method because that could trigger an infinate loop
    */
   protected def doCopyFrom(input:Input) = write (input.bytes)
+
+  def async[U](f: this.type => U):Future[U]
 }
 
