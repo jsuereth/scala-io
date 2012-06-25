@@ -111,7 +111,7 @@ object ScalaIoBuild extends Build {
 
   val perfSettings: Seq[Setting[_]] = Seq(
     name := "scala-io-performance",
-    libraryDependencies += "com.github.jsuereth" %% "sperformance" % "0.1",
+    libraryDependencies += "com.jsuereth" %% "sperformance" % "0.1",
     publishArtifact := false
   )
   lazy val perfProject = Project("perf", file("perf")).
